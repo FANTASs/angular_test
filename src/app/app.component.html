@@ -1,0 +1,35 @@
+<h1 class="title ml-10">
+  {{title}}
+</h1>
+
+<div class="container ml-10 p-0">
+  <input id="search" (keyup.enter)="performSearch(searchTerm)" name="search" #searchTerm type="text" placeholder="Input name giphy">
+  <button class="btn btn-sm" (click)="performSearch(searchTerm)">Search</button>
+  <span class="counter-pagination" *ngIf="giphies.length">Page: {{index}} / {{maxCounterPagination}}</span>
+</div>
+
+<div class="row image">
+  <div class="col-4 giphies" *ngFor="let g of giphies;">
+      <img class="img" src="{{g.images.original.url}}">
+  </div>
+</div>
+
+<nav class="mt-10" *ngIf="giphies.length">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="{disabled: disabledPreviousButton()}">
+      <button  class="page-link" (click)="previousPage()">Previous</button>
+    </li>
+    <li class="page-item">
+      <button (click)="nextIndexPage(index)" class="page-link">{{index}}</button>
+    </li>
+    <li class="page-item">
+      <button (click)="nextIndexPage(index + 1)" class="page-link">{{index + 1}}</button>
+    </li>
+    <li class="page-item">
+      <button (click)="nextIndexPage(index + 2)" class="page-link">{{index + 2}}</button>
+    </li>
+    <li class="page-item" [ngClass]="{disabled: disabledNextButton()}">
+      <button class="page-link" (click)="nextPage()">Next</button>
+    </li>
+  </ul>
+</nav>
